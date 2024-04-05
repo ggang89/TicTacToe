@@ -11,12 +11,20 @@ function Square({ value, onSquareClick }) {
 }
 
 function App() {
-  const [squares, setSquares] = useState(Array(9).fill(null)); //9개의 엘리먼트를 만들고 그 안에 null삽입
-
+  const [xIsNext, setXIsNext] = useState(true);
+  const [squares, setSquares] = useState(Array(9).fill(null));
   function handleClick(i) {
+    if (squares[i]) {
+      return;
+    }
     const nextSquares = squares.slice();
-    nextSquares[i] = "X";
+    if (xIsNext) {
+      nextSquares[i] = "X";
+    } else {
+      nextSquares[i] = "O";
+    }
     setSquares(nextSquares);
+    setXIsNext(!xIsNext);
   }
 
   return (
